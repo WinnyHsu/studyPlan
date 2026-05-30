@@ -18,8 +18,6 @@ export async function POST(req: NextRequest) {
 
     const prompt = `你是一位專業的台灣培訓機師考試數學物理教師。
 請針對以下主題出 ${count} 道四選一選擇題，題目要能手算（嚴禁使用計算機），適合備考 PPL 飛行員執照筆試的程度。
-請嚴格以 JSON 格式回應，不要有 Markdown，不要有 code block，不要有其他文字。
-請確保輸出是完整且可被 JSON.parse 解析的 JSON。
 
 本週主題：${topic}（第 ${week} 週）
 
@@ -31,6 +29,7 @@ export async function POST(req: NextRequest) {
 5. correctIndex 必須是 0、1、2、3 其中之一
 
 請嚴格以 JSON 格式回應，不要有 Markdown，不要有 code block，不要有其他文字：
+請確保輸出是完整且可被 JSON.parse 解析的 JSON。
 {
   "questions": [
     {
