@@ -115,16 +115,16 @@ function QuizPage() {
         </div>
       </Card>
 
-      <Card style={{ marginBottom: 14, background: "#FAEEDA", border: "1px solid #FAC775" }}>
+      {/* <Card style={{ marginBottom: 14, background: "#FAEEDA", border: "1px solid #FAC775" }}>
         <div style={{ fontSize: 13, color: "var(--color-amber-text)", lineHeight: 1.7 }}>
           ⚠️ AI 出題功能目前未啟用。<br/>
           若要開啟，請在 Vercel 環境變數加入 <code>GEMINI_API_KEY</code>，並更新 <code>src/app/api/quiz/route.ts</code>。
         </div>
-      </Card>
+      </Card> */}
 
       {loading && (
         <Card style={{ textAlign: "center", padding: 40, color: "var(--color-text-muted)", fontSize: 13 }}>
-          Claude 正在出題，請稍候...
+          Gemini 正在出題，請稍候...
         </Card>
       )}
 
