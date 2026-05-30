@@ -129,6 +129,7 @@ body {
   border-radius: 6px;
   font-size: 12px;
   cursor: pointer;
+  max-width: 60px;
 }
 @media (max-width: 767px) {
   .cal-cell { font-size: 11px; border-radius: 4px; }
