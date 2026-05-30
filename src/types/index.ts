@@ -1,6 +1,6 @@
 export interface AppConfig {
-  startDate: string;       // ISO date string e.g. "2025-04-28"
-  examDate: string;        // ISO date string e.g. "2025-07-24"
+  startDate: string;       // ISO date string e.g. "2026-04-28"
+  examDate: string;        // ISO date string e.g. "2026-07-24"
   examName: string;
   dailyGoalMinutes: number;
   userName: string;

@@ -8,7 +8,7 @@ import { getCurrentWeek, getDaysUntilExam, getStageForWeek, getTodayPlan, format
 import { format } from "date-fns";
 
 const DEFAULT_CONFIG: AppConfig = {
-  startDate: "2025-04-28", examDate: "2025-07-24",
+  startDate: "2026-04-28", examDate: "2026-07-24",
   examName: "PPL 飛行員執照筆試", dailyGoalMinutes: 180, userName: "",
 };
 
