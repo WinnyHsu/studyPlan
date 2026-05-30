@@ -18,6 +18,8 @@ export async function POST(req: NextRequest) {
 
     const prompt = `你是一位專業的台灣培訓機師考試數學物理教師。
 請針對以下主題出 ${count} 道四選一選擇題，題目要能手算（嚴禁使用計算機），適合備考 PPL 飛行員執照筆試的程度。
+請嚴格以 JSON 格式回應，不要有 Markdown，不要有 code block，不要有其他文字。
+請確保輸出是完整且可被 JSON.parse 解析的 JSON。
 
 本週主題：${topic}（第 ${week} 週）
 
@@ -47,14 +49,45 @@ export async function POST(req: NextRequest) {
       contents: prompt,
       config: {
         responseMimeType: "application/json",
-        maxOutputTokens: 2000,
+        maxOutputTokens: 4096,
       },
     });
 
     const text = response.text ?? "{}";
-    const parsed = JSON.parse(text);
 
-    return NextResponse.json(parsed);
+let parsed;
+
+try {
+  parsed = JSON.parse(text);
+} catch {
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+  if (!jsonMatch) {
+    return NextResponse.json(
+      {
+        error: "AI 回傳格式不是 JSON",
+        raw: text,
+        questions: [],
+      },
+      { status: 500 }
+    );
+  }
+
+  try {
+    parsed = JSON.parse(jsonMatch[0]);
+  } catch {
+    return NextResponse.json(
+      {
+        error: "AI 回傳 JSON 格式不完整，請再試一次",
+        raw: text,
+        questions: [],
+      },
+      { status: 500 }
+    );
+  }
+}
+
+return NextResponse.json(parsed);
   } catch (e: any) {
     return NextResponse.json(
       { error: e?.message || "AI 出題失敗", questions: [] },

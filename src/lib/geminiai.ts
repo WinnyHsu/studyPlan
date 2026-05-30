@@ -31,7 +31,7 @@ export async function generateQuizQuestions(
     contents: prompt,
     config: {
       responseMimeType: 'application/json',
-      maxOutputTokens: 2000,
+      maxOutputTokens: 4096,
     },
   })
 
