@@ -1,7 +1,9 @@
-import Anthropic from '@anthropic-ai/sdk'
+import OpenAI from 'openai'
 import { QuizQuestion, StudyPlanItem } from '@/types'
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+})
 
 // ============================================================
 // AI 出題 — 根據當週讀書計畫自動產生練習題
@@ -12,28 +14,22 @@ export async function generateQuizQuestions(
   count: number = 5,
   mode: 'practice' | 'exam' = 'practice'
 ): Promise<QuizQuestion[]> {
-
   const prompt = mode === 'exam'
     ? buildExamPrompt(plan, count)
     : buildPracticePrompt(plan, count)
 
-  const message = await client.messages.create({
-    model: 'claude-opus-4-5',
-    max_tokens: 2000,
-    messages: [{ role: 'user', content: prompt }],
+  const response = await client.responses.create({
+    model: 'gpt-4.1-mini',
+    input: prompt,
+    max_output_tokens: 2000,
   })
 
-  const text = message.content[0].type === 'text' ? message.content[0].text : ''
+  const text = response.output_text ?? ''
   return parseQuizResponse(text)
 }
 
 export async function generateDailyWarmup(week: number): Promise<string[]> {
-  const message = await client.messages.create({
-    model: 'claude-opus-4-5',
-    max_tokens: 500,
-    messages: [{
-      role: 'user',
-      content: `你是一位準備PPL飛行員執照的數學物理補習老師。
+  const prompt = `你是一位準備PPL飛行員執照的數學物理補習老師。
 請針對第${week}週的學習範圍，出3道適合10分鐘心算暖身的題目。
 要求：
 1. 嚴禁使用計算機，全部要能心算
@@ -41,10 +37,14 @@ export async function generateDailyWarmup(week: number): Promise<string[]> {
 3. 每題一行，格式：Q1. [題目]
 4. 不要給答案，只出題目
 5. 直接輸出3題，不要額外說明`
-    }],
+
+  const response = await client.responses.create({
+    model: 'gpt-4.1-mini',
+    input: prompt,
+    max_output_tokens: 500,
   })
 
-  const text = message.content[0].type === 'text' ? message.content[0].text : ''
+  const text = response.output_text ?? ''
   return text.split('\n').filter(line => line.match(/^Q\d\./)).slice(0, 3)
 }
 
@@ -108,8 +108,10 @@ function parseQuizResponse(text: string): QuizQuestion[] {
   try {
     const jsonMatch = text.match(/\[[\s\S]*\]/)
     if (!jsonMatch) return []
+
     const parsed = JSON.parse(jsonMatch[0])
     if (!Array.isArray(parsed)) return []
+
     return parsed.map((q, i) => ({
       id: q.id ?? `q${i + 1}`,
       question: q.question ?? '',
