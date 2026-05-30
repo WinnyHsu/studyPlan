@@ -9,13 +9,24 @@ export interface AppConfig {
 export interface StudyPlanDay {
   id: string;
   week: number;
-  dayOfWeek: "monday" | "tuesday" | "wednesday" | "thursday" | "friday";
+  dayOfWeek: "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday";
   mathTopic: string;
   mathDetail: string;
   physicsTopic: string;
   physicsDetail: string;
   keyFormulas: string[];
   stage: 1 | 2 | 3;
+}
+
+export interface StudyPlanItem {
+  week: number
+  day: string
+  mathTopic: string
+  physicsTopic: string
+  keyFormulas: string[]
+  stage: 'phase1' | 'phase2' | 'phase3'
+  stageName: string
+  date?: string
 }
 
 export interface DailyProgress {

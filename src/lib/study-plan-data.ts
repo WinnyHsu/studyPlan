@@ -149,21 +149,21 @@ function generateWeeks5to20(): StudyPlanDay[] {
      {week:13,dayOfWeek:"wednesday",stage:2,mathTopic:"題海：電學/波動與排列組合/機率（25題）",mathDetail:"第三大類主題題海，注意機率題的文字理解",physicsTopic:"題海：電學/波動與排列組合/機率（25題）",physicsDetail:"電路+機率+數列混合，強化弱項",keyFormulas:["本週主題：全範圍速度訓練"]},
      {week:13,dayOfWeek:"thursday",stage:2,mathTopic:"當週全範圍錯題詳細訂正與重算",mathDetail:"剪貼錯題、分析錯誤原因、重新手算",physicsTopic:"當週全範圍錯題詳細訂正與重算",physicsDetail:"建立錯題本，標記高頻錯誤觀念",keyFormulas:["錯題分析與整理"]},
      {week:13,dayOfWeek:"friday",stage:2,mathTopic:"限時快算特訓（50題 / 50分鐘）",mathDetail:"設計時器，嚴格1分鐘1題，卡關直接跳過",physicsTopic:"限時快算特訓（50題 / 50分鐘）",physicsDetail:"模擬考場節奏，訓練時間感",keyFormulas:["目標：50題/50分鐘"]}],
-     ...[14,15,16].map(w=>([
+     [14,15,16].flatMap(w=>([
       {week:w,dayOfWeek:"monday" as const,stage:2 as const,mathTopic:"題海：力學與幾何/向量（25題）",mathDetail:"持續刷題，不准用計算機",physicsTopic:"力學與幾何/向量混合題海",physicsDetail:"提升速度與穩定度",keyFormulas:["限時手算"]},
       {week:w,dayOfWeek:"tuesday" as const,stage:2 as const,mathTopic:"題海：熱學/流體與三角函數（25題）",mathDetail:"第二類主題混合刷題",physicsTopic:"熱學流體混合題海",physicsDetail:"白努利+氣體定律強化",keyFormulas:["速度目標提升"]},
       {week:w,dayOfWeek:"wednesday" as const,stage:2 as const,mathTopic:"題海：電學與機率/數列（25題）",mathDetail:"第三類主題刷題",physicsTopic:"電學機率混合題海",physicsDetail:"弱點補強",keyFormulas:["全範圍覆蓋"]},
       {week:w,dayOfWeek:"thursday" as const,stage:2 as const,mathTopic:"全範圍錯題詳細訂正",mathDetail:"本週錯題深度分析",physicsTopic:"全範圍錯題詳細訂正",physicsDetail:"建立最終錯題本",keyFormulas:["錯題整理"]},
       {week:w,dayOfWeek:"friday" as const,stage:2 as const,mathTopic:`限時快算特訓（50題 / 50分鐘）第${w-12}回`,mathDetail:"設計時器，嚴格1分鐘1題",physicsTopic:"限時快算特訓",physicsDetail:"模擬考場節奏",keyFormulas:["目標50題50分鐘"]}
-     ])).flat(),
+     ])),
     // Weeks 17-20: Stage 3
-    ...[17,18,19,20].map(w=>([
+    [17,18,19,20].flatMap(w=>([
       {week:w,dayOfWeek:"monday" as const,stage:3 as const,mathTopic:"英文航空數理題練習",mathDetail:"Lift, Thrust, Drag, Altimeter, Airspeed 等術語中英切換",physicsTopic:"FAA PPL 題庫英文題練習",physicsDetail:"熟悉英文題目格式，practice with FAA written test bank",keyFormulas:["Lift, Thrust, Drag, Weight","IAS/TAS/GS 換算","Density Altitude"]},
       {week:w,dayOfWeek:"tuesday" as const,stage:3 as const,mathTopic:"英文航空術語全面複習",mathDetail:"建立中英對照詞彙表，重點：導航、氣象、性能術語",physicsTopic:"FAA 題庫練習（繼續）",physicsDetail:"每日至少完成30題FAA題庫，記錄錯題",keyFormulas:["航空英文詞彙表"]},
       {week:w,dayOfWeek:"wednesday" as const,stage:3 as const,mathTopic:"全範圍模擬考（嚴格限時）",mathDetail:"1分鐘1題，卡住15秒直接盲猜跳過，模擬真實考場",physicsTopic:"全範圍模擬考（嚴格限時）",physicsDetail:"嚴格計時，訓練心理抗壓能力",keyFormulas:["1題/分鐘","卡15秒→盲猜跳過"]},
       {week:w,dayOfWeek:"thursday" as const,stage:3 as const,mathTopic:"全範圍模擬考（第二場）",mathDetail:"針對週三弱項加強，再次限時演練",physicsTopic:"全範圍模擬考（第二場）",physicsDetail:"提高穩定度，目標達到80分以上",keyFormulas:["目標：模擬考80分以上"]},
       {week:w,dayOfWeek:"friday" as const,stage:3 as const,mathTopic:"錯題本最後盲測",mathDetail:"不看解答，直接作答錯題本所有題目，確保不重複犯錯",physicsTopic:"錯題本最後盲測",physicsDetail:"考前最後確認，建立信心",keyFormulas:["考前最後盲測"]}
-     ])).flat()
+     ]))
   ];
   return weeks.flat().map((d,i)=>({...d,id:`w${d.week}d${i}`}));
 }

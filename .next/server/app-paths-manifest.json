@@ -1,0 +1,17 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/quiz/route": "app/api/quiz/route.js",
+  "/api/config/test/route": "app/api/config/test/route.js",
+  "/api/config/route": "app/api/config/route.js",
+  "/calendar/page": "app/calendar/page.js",
+  "/daily/page": "app/daily/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/api/quiz/wrong/route": "app/api/quiz/wrong/route.js",
+  "/page": "app/page.js",
+  "/quiz/page": "app/quiz/page.js",
+  "/api/stats/route": "app/api/stats/route.js",
+  "/api/schedule/route": "app/api/schedule/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/settings/page": "app/settings/page.js",
+  "/timer/page": "app/timer/page.js"
+}
