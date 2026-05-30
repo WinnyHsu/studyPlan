@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import OpenAI from "openai";
-
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+import { GoogleGenAI } from "@google/genai";
 
 export async function POST(req: NextRequest) {
-  if (!process.env.OPENAI_API_KEY) {
-    return NextResponse.json({ error: "AI 出題功能尚未啟用", questions: [] }, { status: 503 });
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: "AI 出題功能尚未啟用，請設定 GEMINI_API_KEY", questions: [] },
+      { status: 503 }
+    );
   }
+
+  const ai = new GoogleGenAI({ apiKey });
 
   try {
     const { topic, count = 3, week = 1 } = await req.json();
@@ -21,8 +26,9 @@ export async function POST(req: NextRequest) {
 2. 題目難度：中等（不要太簡單也不要需要計算機）
 3. 解析要說明解題思路和公式應用
 4. 如果是航空相關，要說明與飛行的關聯
+5. correctIndex 必須是 0、1、2、3 其中之一
 
-請嚴格以 JSON 格式回應，不要有其他文字：
+請嚴格以 JSON 格式回應，不要有 Markdown，不要有 code block，不要有其他文字：
 {
   "questions": [
     {
@@ -36,17 +42,23 @@ export async function POST(req: NextRequest) {
   ]
 }`;
 
-    const response = await client.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
-      response_format: { type: "json_object" },
-      max_tokens: 2000,
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: {
+        responseMimeType: "application/json",
+        maxOutputTokens: 2000,
+      },
     });
 
-    const text = response.choices[0].message.content || "{}";
+    const text = response.text ?? "{}";
     const parsed = JSON.parse(text);
+
     return NextResponse.json(parsed);
   } catch (e: any) {
-    return NextResponse.json({ error: e.message, questions: [] }, { status: 500 });
+    return NextResponse.json(
+      { error: e?.message || "AI 出題失敗", questions: [] },
+      { status: 500 }
+    );
   }
 }
