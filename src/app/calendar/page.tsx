@@ -71,22 +71,48 @@ function CalendarPage() {
       </div>
 
       <Card style={{ marginBottom: 12 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 2 }}>
-          {WEEKDAYS.map(d => (
-            <div key={d} style={{ fontSize: 11, color: "var(--color-text-faint)", textAlign: "center", paddingBottom: 4, fontWeight: 500 }}>{d}</div>
-          ))}
-          {days.map((d, i) => (
-            <div key={i} onClick={() => d.date && setSelected(d.date)}
-              className="cal-cell"
-              style={{
-                ...(d.date && d.isToday ? STATUS_STYLE.none : d.date ? STATUS_STYLE[d.status] || STATUS_STYLE.future : {}),
-                outline: selected === d.date ? "2px solid var(--color-blue)" : "none",
-                cursor: d.date ? "pointer" : "default",
-              }}>
-              {d.dayLabel}
-            </div>
-          ))}
-        </div>
+       <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(7, minmax(0, 60px))",
+    gap: 2,
+    justifyContent: "center",
+  }}
+>
+  {WEEKDAYS.map(d => (
+    <div
+      key={d}
+      style={{
+        fontSize: 11,
+        color: "var(--color-text-faint)",
+        textAlign: "center",
+        paddingBottom: 4,
+        fontWeight: 500,
+      }}
+    >
+      {d}
+    </div>
+  ))}
+
+  {days.map((d, i) => (
+    <div
+      key={i}
+      onClick={() => d.date && setSelected(d.date)}
+      className="cal-cell"
+      style={{
+        ...(d.date && d.isToday
+          ? STATUS_STYLE.none
+          : d.date
+            ? STATUS_STYLE[d.status] || STATUS_STYLE.future
+            : {}),
+        outline: selected === d.date ? "2px solid var(--color-blue)" : "none",
+        cursor: d.date ? "pointer" : "default",
+      }}
+    >
+      {d.dayLabel}
+    </div>
+  ))}
+</div>
       </Card>
 
       {/* Detail panel */}
