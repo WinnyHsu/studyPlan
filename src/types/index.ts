@@ -1,6 +1,6 @@
 export interface AppConfig {
-  startDate: string;       // ISO date string e.g. "2026-04-28"
-  examDate: string;        // ISO date string e.g. "2026-07-24"
+  startDate: string;
+  examDate: string;
   examName: string;
   dailyGoalMinutes: number;
   userName: string;
@@ -19,19 +19,19 @@ export interface StudyPlanDay {
 }
 
 export interface StudyPlanItem {
-  week: number
-  day: string
-  mathTopic: string
-  physicsTopic: string
-  keyFormulas: string[]
-  stage: 'phase1' | 'phase2' | 'phase3'
-  stageName: string
-  date?: string
+  week: number;
+  day: string;
+  mathTopic: string;
+  physicsTopic: string;
+  keyFormulas: string[];
+  stage: 'phase1' | 'phase2' | 'phase3';
+  stageName: string;
+  date?: string;
 }
 
 export interface DailyProgress {
   id?: string;
-  date: string;            // ISO date string
+  date: string;
   weekNumber: number;
   mathDone: boolean;
   physicsDone: boolean;
@@ -54,12 +54,14 @@ export interface WrongQuestion {
 }
 
 export interface QuizQuestion {
+  id?: string;
   question: string;
   options: [string, string, string, string];
   correctIndex: number;
   explanation: string;
   subject: "math" | "physics";
   topic: string;
+  difficulty?: "easy" | "medium" | "hard";
 }
 
 export type WeekDay = {

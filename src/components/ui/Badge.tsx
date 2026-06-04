@@ -1,5 +1,5 @@
 type Color = "blue"|"green"|"amber"|"red"|"gray";
-const COLORS: Record<Color,{bg:string,text:string}> = {
+const COLORS: Record<Color,{bg:string;text:string}> = {
   blue:  {bg:"var(--color-blue-light)",  text:"var(--color-blue-text)"},
   green: {bg:"var(--color-green-light)", text:"var(--color-green-text)"},
   amber: {bg:"var(--color-amber-light)", text:"var(--color-amber-text)"},

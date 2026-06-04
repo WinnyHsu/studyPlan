@@ -24,10 +24,8 @@
   --color-red-text: #791F1F;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
+*  { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
-
 body {
   background: var(--color-bg);
   color: var(--color-text);
@@ -35,109 +33,33 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Mobile utilities */
-.mobile-content-pad {
-  padding-bottom: 16px;
+.page-pad { padding: 20px 24px; }
+@media (max-width: 767px) { .page-pad { padding: 14px 14px; } }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 767px) { .grid-2 { grid-template-columns: 1fr; gap: 10px; } }
+
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+@media (max-width: 767px) { .grid-4 { grid-template-columns: repeat(2,1fr); gap: 8px; } }
+
+.page-title { font-size: 20px; font-weight: 500; margin-bottom: 4px; }
+@media (max-width: 767px) { .page-title { font-size: 17px; } }
+
+.metric-value { font-size: 20px !important; font-weight: 500; }
+@media (max-width: 767px) { .metric-value { font-size: 17px !important; } }
+.metric-sub   { font-size: 11px !important; }
+@media (max-width: 767px) { .metric-sub { font-size: 10px !important; } }
+
+.timer-display { font-size: 52px; font-weight: 500; letter-spacing: 4px; font-variant-numeric: tabular-nums; }
+@media (max-width: 767px) { .timer-display { font-size: 38px; letter-spacing: 2px; } }
+
+.cal-cell { aspect-ratio:1; display:flex; align-items:center; justify-content:center; border-radius:6px; font-size:12px; }
+@media (max-width: 767px) { .cal-cell { font-size:11px; border-radius:4px; } }
+
+@media (max-width: 767px) {
+  button { min-height: 40px; }
+  .task-check-touch { min-height: unset !important; }
 }
 
-.scroll-hide {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
+.scroll-hide { scrollbar-width: none; -ms-overflow-style: none; }
 .scroll-hide::-webkit-scrollbar { display: none; }
-
-/* Responsive grid helpers */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-@media (max-width: 767px) {
-  .grid-2 { grid-template-columns: 1fr; gap: 10px; }
-}
-
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-@media (max-width: 767px) {
-  .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-}
-
-/* Page padding */
-.page-pad {
-  padding: 20px 24px;
-}
-@media (max-width: 767px) {
-  .page-pad { padding: 14px 14px; }
-}
-
-/* Card responsive padding */
-.card-inner {
-  padding: 14px 16px;
-}
-@media (max-width: 767px) {
-  .card-inner { padding: 12px 12px; }
-}
-
-/* Typography responsive */
-.page-title {
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-@media (max-width: 767px) {
-  .page-title { font-size: 17px; }
-}
-
-/* Touch target minimum */
-@media (max-width: 767px) {
-  button, [role="button"] {
-    min-height: 40px;
-  }
-  .task-check-touch {
-    width: 24px !important;
-    height: 24px !important;
-    min-height: unset !important;
-  }
-}
-
-/* Metric card compact on mobile */
-@media (max-width: 767px) {
-  .metric-value { font-size: 18px !important; }
-  .metric-sub   { font-size: 10px !important; }
-}
-
-/* Timer display */
-.timer-display {
-  font-size: 52px;
-  font-weight: 500;
-  letter-spacing: 4px;
-  font-variant-numeric: tabular-nums;
-}
-@media (max-width: 767px) {
-  .timer-display { font-size: 38px; letter-spacing: 2px; }
-}
-
-/* Calendar cell */
-.cal-cell {
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-  max-width: 60px;
-}
-@media (max-width: 767px) {
-  .cal-cell { font-size: 11px; border-radius: 4px; }
-}
-
-/* Nav bar safe area */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  nav[data-bottom-nav] {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
