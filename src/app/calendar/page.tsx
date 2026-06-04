@@ -71,14 +71,14 @@ function CalendarPage() {
         </div>
       </div>
       <Card style={{marginBottom:12}}>
-        <div
+<div
   style={{
     display: "grid",
     gridTemplateColumns: "repeat(7, minmax(0, 60px))",
     gap: 2,
     justifyContent: "center",
   }}
-  >
+>
           {WEEKDAYS.map(d=><div
       key={d}
       style={{
