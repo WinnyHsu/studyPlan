@@ -78,6 +78,7 @@ function CalendarPage() {
     gap: 2,
     justifyContent: "center",
   }}
+  >
           {WEEKDAYS.map(d=><div
       key={d}
       style={{
